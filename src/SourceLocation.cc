@@ -37,3 +37,14 @@ void clang::SourceLocation::get_data(std::string* path, unsigned *line, unsigned
   }
 }
 
+
+std::ostream &clang::operator<<(std::ostream &stream, const clang::SourceLocation &srcLoc)
+{
+    auto cxLoc = srcLoc.cx_location;
+    CXFile file = nullptr;
+    unsigned int line, col;
+    clang_getExpansionLocation(cxLoc, &file, &line, &col, nullptr);
+    const char* fileName = (file?  clang_getCString(clang_getFileName(file)) : "unknown filename");
+    stream << fileName << ":" << line << ":" << col;
+    return stream;
+}

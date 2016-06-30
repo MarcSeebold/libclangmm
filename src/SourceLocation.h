@@ -2,6 +2,7 @@
 #define SOURCELOCATION_H_
 #include <clang-c/Index.h>
 #include <string>
+#include <iostream>
 
 namespace clang {
   class Offset {
@@ -30,6 +31,7 @@ namespace clang {
   private:
     void get_data(std::string *path, unsigned *line, unsigned *column, unsigned *offset);
   };
+  std::ostream& operator<< (std::ostream& stream, const SourceLocation& srcLoc);
 
 }  // namespace clang
 #endif  // SOURCELOCATION_H_

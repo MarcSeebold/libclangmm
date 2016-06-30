@@ -44,6 +44,7 @@ namespace clang {
     std::unique_ptr<Tokens> get_tokens(unsigned start_line, unsigned start_column,
                                        unsigned end_line, unsigned end_column);
 
+    clang::Cursor get_cursor(const SourceLocation &loc);
     clang::Cursor get_cursor(std::string path, unsigned offset);
     clang::Cursor get_cursor(std::string path, unsigned line, unsigned column);
 

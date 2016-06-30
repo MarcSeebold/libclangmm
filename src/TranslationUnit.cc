@@ -109,6 +109,11 @@ std::unique_ptr<clang::Tokens> clang::TranslationUnit::get_tokens(unsigned start
   return std::unique_ptr<Tokens>(new Tokens(cx_tu, range));
 }
 
+clang::Cursor clang::TranslationUnit::get_cursor(const clang::SourceLocation &loc)
+{
+    return Cursor(clang_getCursor(cx_tu, loc.cx_location));
+}
+
 clang::Cursor clang::TranslationUnit::get_cursor(std::string path, unsigned offset) {
   clang::SourceLocation location(cx_tu, path, offset);
   return Cursor(clang_getCursor(cx_tu, location.cx_location));

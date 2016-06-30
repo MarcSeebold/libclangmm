@@ -2,7 +2,7 @@
 #include "Utility.h"
 #include <algorithm>
 
-clang::CursorKind clang::Cursor::get_kind() {
+clang::CursorKind clang::Cursor::get_kind() const {
   return static_cast<CursorKind>(clang_getCursorKind(this->cx_cursor));
 }
 
@@ -38,7 +38,7 @@ bool clang::Cursor::operator==(const Cursor& rhs) const {
   return clang_equalCursors(cx_cursor, rhs.cx_cursor);
 }
 
-bool clang::Cursor::has_type() {
+bool clang::Cursor::has_type() const {
   auto referenced=clang_getCursorReferenced(cx_cursor);
   if(clang_Cursor_isNull(referenced))
     return false;
@@ -46,7 +46,7 @@ bool clang::Cursor::has_type() {
   return type.kind!=0;
 }
 
-std::string clang::Cursor::get_type() {
+std::string clang::Cursor::get_type() const {
   std::string spelling;
   auto referenced=clang_getCursorReferenced(cx_cursor);
   if(!clang_Cursor_isNull(referenced)) {
@@ -79,7 +79,7 @@ std::string clang::Cursor::get_type() {
   return spelling;
 }
 
-std::string clang::Cursor::get_brief_comments() {
+std::string clang::Cursor::get_brief_comments() const {
   std::string comment_string;
   auto referenced=get_referenced();
   if(referenced) {

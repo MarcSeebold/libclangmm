@@ -178,7 +178,7 @@ namespace clang {
   public:
     Cursor() { cx_cursor=clang_getNullCursor(); }
     Cursor(const CXCursor &cx_cursor) : cx_cursor(cx_cursor) {}
-    CursorKind get_kind();
+    CursorKind get_kind() const;
     SourceLocation get_source_location() const;
     SourceRange get_source_range() const;
     std::string get_spelling() const;
@@ -188,9 +188,9 @@ namespace clang {
     operator bool() const;
     bool operator==(const Cursor& rhs) const;
     
-    bool has_type();
-    std::string get_type();
-    std::string get_brief_comments();
+    bool has_type() const;
+    std::string get_type() const;
+    std::string get_brief_comments() const;
     
     CXCursor cx_cursor;
   };

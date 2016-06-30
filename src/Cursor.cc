@@ -23,11 +23,21 @@ std::string clang::Cursor::get_usr() const {
 }
 
 clang::Cursor clang::Cursor::get_referenced() const {
-  return Cursor(clang_getCursorReferenced(cx_cursor));
+    return Cursor(clang_getCursorReferenced(cx_cursor));
+}
+
+clang::Cursor clang::Cursor::get_canonicalTypeDeclaration() const
+{
+    return Cursor(clang_getTypeDeclaration(clang_getCanonicalType(clang_getCursorType(this->cx_cursor))));
 }
 
 clang::Cursor clang::Cursor::get_semantic_parent() const {
-  return clang::Cursor(clang_getCursorSemanticParent(cx_cursor));
+    return clang::Cursor(clang_getCursorSemanticParent(cx_cursor));
+}
+
+clang::Cursor clang::Cursor::get_lexical_parent() const
+{
+    return clang::Cursor(clang_getCursorLexicalParent(cx_cursor));
 }
 
 clang::Cursor::operator bool() const {

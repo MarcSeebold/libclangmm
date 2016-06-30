@@ -184,7 +184,9 @@ namespace clang {
     std::string get_spelling() const;
     std::string get_usr() const;
     Cursor get_referenced() const;
+    Cursor get_canonicalTypeDeclaration() const;
     Cursor get_semantic_parent() const;
+    Cursor get_lexical_parent() const;
     operator bool() const;
     bool operator==(const Cursor& rhs) const;
     
